@@ -4129,6 +4129,33 @@
 						}
 					},
 					{
+						"name": "chat_room_member",
+						"in": "query",
+						"description": "",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "time_start",
+						"in": "query",
+						"description": "",
+						"required": false,
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"name": "time_end",
+						"in": "query",
+						"description": "",
+						"required": false,
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
 						"name": "page_index",
 						"in": "query",
 						"description": "",
