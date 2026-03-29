@@ -1,11 +1,29 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { useBoolean, useRequest, useSetState } from 'ahooks';
-import { App, Avatar, Button, Col, Drawer, Input, List, Pagination, Row, Space, Tag, theme } from 'antd';
+import { useBoolean, useDebounceFn, useRequest, useSetState } from 'ahooks';
+import {
+	App,
+	Avatar,
+	Button,
+	Col,
+	DatePicker,
+	Drawer,
+	Flex,
+	Input,
+	List,
+	Pagination,
+	Row,
+	Select,
+	Space,
+	Tag,
+	theme,
+} from 'antd';
 import dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import React from 'react';
 import type { ReactNode } from 'react';
 import styled from 'styled-components';
 import type { Api } from '@/api/wechat-robot/wechat-robot';
+import { filterOption } from '@/common/filter-option';
 import SendMessage from '@/components/send-message';
 import { DefaultAvatar } from '@/constant';
 import { AppMessageType, MessageType } from '@/constant/types';
@@ -25,6 +43,14 @@ interface IProps {
 	onClose: () => void;
 }
 
+interface IState {
+	keyword: string;
+	chatRoomMember?: string;
+	timeStart?: Dayjs;
+	timeEnd?: Dayjs;
+	pageIndex: number;
+}
+
 const MessageContentContainer = styled.div`
 	.text-message {
 		margin: 0px;
@@ -42,10 +68,18 @@ const ChatHistory = (props: IProps) => {
 
 	const { contact, robot } = props;
 
-	const [search, setSearch] = useSetState({ keyword: '', pageIndex: 1 });
+	const [search, setSearch] = useSetState<IState>({ keyword: '', pageIndex: 1 });
+
+	const { run: onKeywordDebounced } = useDebounceFn(
+		(value: string) => {
+			setSearch({ keyword: value, pageIndex: 1 });
+		},
+		{ wait: 500 },
+	);
+
 	const [sendMessageOpen, setSendMessageOpen] = useBoolean(false);
 
-	const { data: chatRoomMembers } = useRequest(
+	const { data: chatRoomMember, loading: chatRoomMemberLoading } = useRequest(
 		async () => {
 			const resp = await window.wechatRobotClient.api.v1ChatRoomMembersList({
 				id: props.robotId,
@@ -58,7 +92,10 @@ const ChatHistory = (props: IProps) => {
 			members.forEach(item => {
 				memberMap[item.wechat_id] = item.remark || item.alias || item.nickname || item.wechat_id;
 			});
-			return memberMap;
+			return {
+				map: memberMap,
+				list: members,
+			};
 		},
 		{
 			manual: false,
@@ -75,6 +112,9 @@ const ChatHistory = (props: IProps) => {
 				id: props.robotId,
 				contact_id: contact.wechat_id!,
 				keyword: search.keyword,
+				chat_room_member: search.chatRoomMember,
+				time_start: search.timeStart ? dayjs(search.timeStart).unix() : undefined,
+				time_end: search.timeEnd ? dayjs(search.timeEnd).unix() : undefined,
 				page_index: search.pageIndex,
 				page_size: 20,
 			});
@@ -207,25 +247,91 @@ const ChatHistory = (props: IProps) => {
 			footer={null}
 		>
 			<div>
-				<Row
+				<Flex
 					style={{ marginBottom: 16 }}
-					align="middle"
+					gap={8}
+					align="center"
 					wrap={false}
-					gutter={8}
 				>
-					<Col flex="0 1 350px">
-						<Input
-							placeholder="搜索聊天记录"
-							prefix={<SearchOutlined />}
+					<Input
+						style={{ width: 250 }}
+						placeholder="根据关键字搜索"
+						prefix={<SearchOutlined />}
+						allowClear
+						onChange={ev => {
+							onKeywordDebounced(ev.target.value);
+						}}
+					/>
+					{props.contact.wechat_id?.endsWith('@chatroom') && (
+						<Select
+							style={{ width: 250 }}
+							placeholder="根据群成员搜索"
+							showSearch={{
+								filterOption,
+							}}
 							allowClear
-							onKeyDown={ev => {
-								if (ev.key === 'Enter') {
-									setSearch({ keyword: ev.currentTarget.value, pageIndex: 1 });
-								}
+							loading={chatRoomMemberLoading}
+							maxTagCount="responsive"
+							options={(chatRoomMember?.list || []).map(item => {
+								const labelText = item.remark || item.nickname || item.alias || item.wechat_id;
+								return {
+									label: (
+										<Row
+											align="middle"
+											wrap={false}
+											gutter={3}
+										>
+											<Col flex="0 0 auto">
+												<Avatar
+													src={item.avatar || DefaultAvatar}
+													gap={0}
+													size={18}
+												/>
+											</Col>
+											<Col
+												flex="1 1 auto"
+												className="ellipsis"
+											>
+												{item.is_leaved ? (
+													<s>
+														{labelText}
+														{item.is_leaved && <span style={{ color: 'red' }}> (已退群)</span>}
+													</s>
+												) : (
+													<span>{labelText}</span>
+												)}
+											</Col>
+										</Row>
+									),
+									value: item.wechat_id,
+									text: `${item.remark || ''} ${item.nickname || ''} ${item.alias || ''} ${item.wechat_id}`,
+								};
+							})}
+							value={search.chatRoomMember}
+							onChange={value => {
+								setSearch({ chatRoomMember: value, pageIndex: 1 });
 							}}
 						/>
-					</Col>
-				</Row>
+					)}
+					<DatePicker.RangePicker
+						showTime
+						format="YYYY/MM/DD HH:mm:ss"
+						presets={[
+							{ label: '最近一周', value: [dayjs().add(-7, 'd'), dayjs()] },
+							{ label: '最近两周', value: [dayjs().add(-14, 'd'), dayjs()] },
+							{ label: '最近一个月', value: [dayjs().add(-30, 'd'), dayjs()] },
+							{ label: '最近三个月', value: [dayjs().add(-90, 'd'), dayjs()] },
+						]}
+						value={search.timeStart && search.timeEnd ? [search.timeStart, search.timeEnd] : undefined}
+						onChange={dates => {
+							if (!dates || !dates[0] || !dates[1]) {
+								setSearch({ timeStart: undefined, timeEnd: undefined, pageIndex: 1 });
+								return;
+							}
+							setSearch({ timeStart: dates[0], timeEnd: dates[1], pageIndex: 1 });
+						}}
+					/>
+				</Flex>
 				<div
 					style={{
 						border: '1px solid rgba(5,5,5,0.06)',
@@ -266,7 +372,7 @@ const ChatHistory = (props: IProps) => {
 															<MessageContent
 																robotId={props.robotId}
 																message={item}
-																chatRoomMembers={chatRoomMembers}
+																chatRoomMembers={chatRoomMember?.map}
 															/>
 														</s>
 													</>
@@ -275,7 +381,7 @@ const ChatHistory = (props: IProps) => {
 														<MessageContent
 															robotId={props.robotId}
 															message={item}
-															chatRoomMembers={chatRoomMembers}
+															chatRoomMembers={chatRoomMember?.map}
 														/>
 													</span>
 												)}
