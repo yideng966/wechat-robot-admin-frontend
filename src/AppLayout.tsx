@@ -1,6 +1,6 @@
-import { FileWordOutlined, GithubOutlined, LogoutOutlined } from '@ant-design/icons';
+import { FileWordOutlined, GithubOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { useRequest, useSize } from 'ahooks';
-import { App, Avatar, Divider, Dropdown, Flex, Layout, Skeleton, Space, Watermark } from 'antd';
+import { App, Avatar, Dropdown, Layout, Skeleton, Watermark } from 'antd';
 import type { MenuProps } from 'antd';
 import logo from 'public/logo.svg';
 import React from 'react';
@@ -15,61 +15,108 @@ const rootStyle: React.CSSProperties = { minHeight: '100vh' };
 const headerStyle: React.CSSProperties = {
 	position: 'sticky',
 	top: 0,
-	zIndex: 1,
+	zIndex: 100,
 	width: '100%',
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
-	paddingLeft: 10,
-	paddingRight: 10,
-	backgroundColor: '#dddddd',
+	paddingLeft: 20,
+	paddingRight: 20,
+	height: 60,
+	lineHeight: '60px',
+	background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+	borderBottom: '1px solid rgba(255,255,255,0.08)',
+	boxShadow: '0 2px 16px rgba(0,0,0,0.25)',
 };
 
 const Logo = styled.div`
-	width: 250px;
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	gap: 10px;
+	margin-right: 32px;
+	cursor: default;
+	user-select: none;
 
 	.icon {
-		margin: 0 auto;
-		width: 32px;
-		height: 32px;
-		border-radius: 50%;
+		width: 34px;
+		height: 34px;
+		border-radius: 8px;
 		background: url('${logo}') center / contain no-repeat;
+		flex-shrink: 0;
+		filter: drop-shadow(0 2px 6px rgba(82, 196, 26, 0.4));
 	}
 
 	.title {
-		width: 180px;
-		height: 32px;
-		margin-inline-end: 24px;
-		color: #000000;
-		font-weight: 600;
-		font-size: 18px;
-		line-height: 32px;
-		vertical-align: middle;
+		color: #ffffff;
+		font-weight: 700;
+		font-size: 16px;
+		letter-spacing: 0.5px;
+		white-space: nowrap;
 	}
 `;
 
-const Nav = styled.div`
-	height: 64px;
+const LogoDivider = styled.div`
+	width: 1px;
+	height: 24px;
+	background: rgba(255, 255, 255, 0.15);
+	margin-right: 16px;
+`;
+
+const Nav = styled.nav`
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
-	gap: 12px;
+	gap: 4px;
 
 	.nav-item {
 		display: flex;
 		align-items: center;
-		padding: 0 8px;
-		gap: 4px;
+		gap: 6px;
+		padding: 0 16px;
+		border-radius: 3px;
 		cursor: pointer;
+		color: rgba(255, 255, 255, 0.85);
+		font-size: 14px;
+		font-weight: 500;
+		background: rgba(255, 255, 255, 0.08);
+		transform: skewX(-12deg);
+		transition:
+			background 0.2s,
+			color 0.2s;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.18);
+			color: #ffffff;
+		}
+
+		.nav-icon,
+		span {
+			display: inline-flex;
+			align-items: center;
+			transform: skewX(12deg);
+		}
 
 		.nav-icon {
-			font-size: 20px;
-			vertical-align: middle;
-			color: #4d4c4c;
+			font-size: 16px;
 		}
+	}
+`;
+
+const UserArea = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 5px 10px;
+	border-radius: 24px;
+	cursor: pointer;
+
+	.username {
+		color: rgba(255, 255, 255, 0.9);
+		font-size: 14px;
+		font-weight: 500;
+		max-width: 120px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 `;
 
@@ -130,14 +177,12 @@ const AppLayout: React.FC = () => {
 		>
 			<Layout style={rootStyle}>
 				<Header style={headerStyle}>
-					<Flex
-						justify="flex-start"
-						align="center"
-					>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<Logo>
 							<div className="icon" />
 							<div className="title">微信机器人管理后台</div>
 						</Logo>
+						<LogoDivider />
 						<Nav>
 							<div
 								className="nav-item"
@@ -146,7 +191,7 @@ const AppLayout: React.FC = () => {
 								}}
 							>
 								<GithubOutlined className="nav-icon" />
-								<b>GitHub</b>
+								<span>GitHub</span>
 							</div>
 							<div
 								className="nav-item"
@@ -155,29 +200,26 @@ const AppLayout: React.FC = () => {
 								}}
 							>
 								<FileWordOutlined className="nav-icon" />
-								<b>使用文档</b>
+								<span>使用文档</span>
 							</div>
 						</Nav>
-					</Flex>
-					<Space separator={<Divider orientation="vertical" />}>
-						<Dropdown
-							menu={{ items }}
-							placement="bottomRight"
-						>
-							<div>
-								<Avatar
-									style={{ verticalAlign: 'middle', backgroundColor: 'rgb(132, 132, 131)' }}
-									size="default"
-									gap={4}
-									src={user.avatar_url}
-									alt={user.display_name}
-								/>
-								{isSmallScreen ? null : (
-									<span style={{ color: '#000000', marginLeft: 5, fontSize: 15 }}>{user.display_name}</span>
-								)}
-							</div>
-						</Dropdown>
-					</Space>
+					</div>
+					<Dropdown
+						menu={{ items }}
+						placement="bottomRight"
+					>
+						<UserArea>
+							<Avatar
+								size={32}
+								gap={4}
+								src={user.avatar_url}
+								alt={user.display_name}
+								icon={<UserOutlined />}
+								style={{ backgroundColor: '#0f3460', flexShrink: 0 }}
+							/>
+							{isSmallScreen ? null : <span className="username">{user.display_name}</span>}
+						</UserArea>
+					</Dropdown>
 				</Header>
 				<Layout>
 					<UserContext.Provider value={{ user: user, signOut }}>
