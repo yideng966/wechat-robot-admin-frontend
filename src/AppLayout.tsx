@@ -1,5 +1,5 @@
 import { FileWordOutlined, GithubOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import { useRequest, useSize } from 'ahooks';
+import { useRequest } from 'ahooks';
 import { App, Avatar, Dropdown, Layout, Skeleton, Watermark } from 'antd';
 import type { MenuProps } from 'antd';
 import logo from 'public/logo.svg';
@@ -52,6 +52,10 @@ const Logo = styled.div`
 		font-size: 16px;
 		letter-spacing: 0.5px;
 		white-space: nowrap;
+
+		@media (max-width: 639px) {
+			display: none;
+		}
 	}
 `;
 
@@ -60,6 +64,10 @@ const LogoDivider = styled.div`
 	height: 24px;
 	background: rgba(255, 255, 255, 0.15);
 	margin-right: 16px;
+
+	@media (max-width: 639px) {
+		display: none;
+	}
 `;
 
 const Nav = styled.nav`
@@ -98,6 +106,12 @@ const Nav = styled.nav`
 		.nav-icon {
 			font-size: 16px;
 		}
+
+		span {
+			@media (max-width: 639px) {
+				display: none;
+			}
+		}
 	}
 `;
 
@@ -117,14 +131,15 @@ const UserArea = styled.div`
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+
+		@media (max-width: 1279px) {
+			display: none;
+		}
 	}
 `;
 
 const AppLayout: React.FC = () => {
 	const { message } = App.useApp();
-
-	const bodySize = useSize(document.body);
-	const isSmallScreen = (bodySize?.width || 0) < 1280;
 
 	// 获取用户详情
 	const { data: user, loading: userLoading } = useRequest(
@@ -217,7 +232,7 @@ const AppLayout: React.FC = () => {
 								icon={<UserOutlined />}
 								style={{ backgroundColor: '#0f3460', flexShrink: 0 }}
 							/>
-							{isSmallScreen ? null : <span className="username">{user.display_name}</span>}
+							<span className="username">{user.display_name}</span>
 						</UserArea>
 					</Dropdown>
 				</Header>
