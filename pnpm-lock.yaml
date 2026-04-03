@@ -15,11 +15,11 @@ dependencies:
     specifier: ^2.0.3
     version: 2.0.3
   antd:
-    specifier: ^6.3.4
-    version: 6.3.4(react-dom@19.0.0)(react@19.0.0)
+    specifier: ^6.3.5
+    version: 6.3.5(react-dom@19.0.0)(react@19.0.0)
   antd-style:
     specifier: ^4.1.0
-    version: 4.1.0(@types/react@19.0.7)(antd@6.3.4)(react-dom@19.0.0)(react@19.0.0)
+    version: 4.1.0(@types/react@19.0.7)(antd@6.3.5)(react-dom@19.0.0)(react@19.0.0)
   axios:
     specifier: ^1.7.9
     version: 1.7.9
@@ -66,7 +66,7 @@ dependencies:
 devDependencies:
   '@ant-design/v5-patch-for-react-19':
     specifier: ^1.0.3
-    version: 1.0.3(antd@6.3.4)(react-dom@19.0.0)(react@19.0.0)
+    version: 1.0.3(antd@6.3.5)(react-dom@19.0.0)(react@19.0.0)
   '@eslint/js':
     specifier: ^9.18.0
     version: 9.18.0
@@ -208,8 +208,8 @@ packages:
   /@ant-design/icons-svg@4.4.2:
     resolution: {integrity: sha512-vHbT+zJEVzllwP+CM+ul7reTEfBR0vgxFe7+lREAsAA7YGsYpboiq2sQNeQeRvh09GfQgs/GyFEvZpJ9cLXpXA==}
 
-  /@ant-design/icons@6.1.0(react-dom@19.0.0)(react@19.0.0):
-    resolution: {integrity: sha512-KrWMu1fIg3w/1F2zfn+JlfNDU8dDqILfA5Tg85iqs1lf8ooyGlbkA+TkwfOKKgqpUmAiRY1PTFpuOU2DAIgSUg==}
+  /@ant-design/icons@6.1.1(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-AMT4N2y++TZETNHiM77fs4a0uPVCJGuL5MTonk13Pvv7UN7sID1cNEZOc1qNqx6zLKAOilTEFAdAoAFKa0U//Q==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.0.0'
@@ -235,7 +235,7 @@ packages:
       react-dom: 19.0.0(react@19.0.0)
       throttle-debounce: 5.0.2
 
-  /@ant-design/v5-patch-for-react-19@1.0.3(antd@6.3.4)(react-dom@19.0.0)(react@19.0.0):
+  /@ant-design/v5-patch-for-react-19@1.0.3(antd@6.3.5)(react-dom@19.0.0)(react@19.0.0):
     resolution: {integrity: sha512-iWfZuSUl5kuhqLUw7jJXUQFMMkM7XpW7apmKzQBQHU0cpifYW4A79xIBt9YVO5IBajKpPG5UKP87Ft7Yrw1p/w==}
     engines: {node: '>=12.x'}
     peerDependencies:
@@ -243,7 +243,7 @@ packages:
       react: '>=19.0.0'
       react-dom: '>=19.0.0'
     dependencies:
-      antd: 6.3.4(react-dom@19.0.0)(react@19.0.0)
+      antd: 6.3.5(react-dom@19.0.0)(react@19.0.0)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
     dev: true
@@ -893,7 +893,7 @@ packages:
       react-dom: '>=18.0.0'
     dependencies:
       '@babel/runtime': 7.28.4
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -927,7 +927,7 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
     dependencies:
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/portal': 2.2.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
@@ -940,7 +940,7 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
     dependencies:
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/portal': 2.2.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
@@ -978,7 +978,7 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/portal': 2.2.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
@@ -1029,7 +1029,7 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/overflow': 1.0.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/trigger': 3.9.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
@@ -1043,8 +1043,8 @@ packages:
     dependencies:
       '@babel/runtime': 7.28.4
 
-  /@rc-component/motion@1.3.1(react-dom@19.0.0)(react@19.0.0):
-    resolution: {integrity: sha512-Wo1mkd0tCcHtvYvpPOmlYJz546z16qlsiwaygmW7NPJpOZOF9GBjhGzdzZSsC2lEJ1IUkWLF4gMHlRA1aSA+Yw==}
+  /@rc-component/motion@1.3.2(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-itfd+GztzJYAb04Z4RkEub1TbJAfZc2Iuy8p44U44xD1F5+fNYFKI3897ijlbIyfvXkTmMm+KGcjkQQGMHywEQ==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -1072,7 +1072,7 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -1085,7 +1085,7 @@ packages:
       react-dom: '>=16.9.0'
     dependencies:
       '@babel/runtime': 7.28.4
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -1123,7 +1123,7 @@ packages:
         optional: true
     dependencies:
       '@rc-component/overflow': 1.0.0(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/trigger': 3.9.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
@@ -1177,8 +1177,8 @@ packages:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  /@rc-component/resize-observer@1.1.1(react-dom@19.0.0)(react@19.0.0):
-    resolution: {integrity: sha512-NfXXMmiR+SmUuKE1NwJESzEUYUFWIDUn2uXpxCTOLwiRUUakd62DRNFjRJArgzyFW8S5rsL4aX5XlyIXyC/vRA==}
+  /@rc-component/resize-observer@1.1.2(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-t/Bb0W8uvL4PYKAB3YcChC+DlHh0Wt5kM7q/J+0qpVEUMLe7Hk5zuvc9km0hMnTFPSx5Z7Wu/fzCLN6erVLE8Q==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -1194,7 +1194,7 @@ packages:
       react-dom: '>=16.0.0'
     dependencies:
       '@babel/runtime': 7.28.4
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -1258,7 +1258,7 @@ packages:
       react-dom: '>=18.0.0'
     dependencies:
       '@rc-component/context': 2.0.1(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/virtual-list': 1.0.2(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
@@ -1274,8 +1274,8 @@ packages:
     dependencies:
       '@rc-component/dropdown': 1.0.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/menu': 1.2.0(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -1288,7 +1288,7 @@ packages:
       react-dom: '>=16.9.0'
     dependencies:
       '@rc-component/input': 1.1.2(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -1340,7 +1340,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/virtual-list': 1.0.2(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
@@ -1354,9 +1354,9 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
     dependencies:
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/portal': 2.2.0(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -1404,7 +1404,7 @@ packages:
       react-dom: '>=16.9.0'
     dependencies:
       '@babel/runtime': 7.28.4
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/util': 1.10.0(react-dom@19.0.0)(react@19.0.0)
       clsx: 2.1.1
       react: 19.0.0
@@ -2418,7 +2418,7 @@ packages:
     resolution: {integrity: sha512-pzusTqk9VHrjgMCcTPDTTvfJfx6Q3+L5tQ6yKC8Diexmoit4YROTFIkxFvRTNL9y5s0Q8HrSrgerCD5bIC+Kiw==}
     dev: false
 
-  /antd-style@4.1.0(@types/react@19.0.7)(antd@6.3.4)(react-dom@19.0.0)(react@19.0.0):
+  /antd-style@4.1.0(@types/react@19.0.7)(antd@6.3.5)(react-dom@19.0.0)(react@19.0.0):
     resolution: {integrity: sha512-vnPBGg0OVlSz90KRYZhxd89aZiOImTiesF+9MQqN8jsLGZUQTjbP04X9jTdEfsztKUuMbBWg/RmB/wHTakbtMQ==}
     peerDependencies:
       antd: '>=6.0.0'
@@ -2431,7 +2431,7 @@ packages:
       '@emotion/react': 11.14.0(@types/react@19.0.7)(react@19.0.0)
       '@emotion/serialize': 1.3.3
       '@emotion/utils': 1.4.2
-      antd: 6.3.4(react-dom@19.0.0)(react@19.0.0)
+      antd: 6.3.5(react-dom@19.0.0)(react@19.0.0)
       react: 19.0.0
       use-merge-value: 1.2.0(react@19.0.0)
     transitivePeerDependencies:
@@ -2440,8 +2440,8 @@ packages:
       - supports-color
     dev: false
 
-  /antd@6.3.4(react-dom@19.0.0)(react@19.0.0):
-    resolution: {integrity: sha512-Bu6JivPP7bFfYIdVj+61dxhwSOz+A3m0W7PlDasFGC3H3sNMYQ9gJXZoo11/rQh7pTlOQa351q5Ig/zjI98XYw==}
+  /antd@6.3.5(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-8BPz9lpZWQm42PTx7yL4KxWAotVuqINiKcoYRcLtdd5BFmAcAZicVyFTnBJyRDlzGZFZeRW3foGu6jXYFnej6Q==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -2450,7 +2450,7 @@ packages:
       '@ant-design/cssinjs': 2.1.2(react-dom@19.0.0)(react@19.0.0)
       '@ant-design/cssinjs-utils': 2.1.2(react-dom@19.0.0)(react@19.0.0)
       '@ant-design/fast-color': 3.0.1
-      '@ant-design/icons': 6.1.0(react-dom@19.0.0)(react@19.0.0)
+      '@ant-design/icons': 6.1.1(react-dom@19.0.0)(react@19.0.0)
       '@ant-design/react-slick': 2.0.0(react-dom@19.0.0)(react@19.0.0)
       '@babel/runtime': 7.28.4
       '@rc-component/cascader': 1.14.0(react-dom@19.0.0)(react@19.0.0)
@@ -2466,7 +2466,7 @@ packages:
       '@rc-component/input-number': 1.6.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/mentions': 1.6.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/menu': 1.2.0(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/motion': 1.3.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/motion': 1.3.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/mutate-observer': 2.0.1(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/notification': 1.2.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/pagination': 1.2.0(react-dom@19.0.0)(react@19.0.0)
@@ -2474,7 +2474,7 @@ packages:
       '@rc-component/progress': 1.0.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/qrcode': 1.1.1(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/rate': 1.0.1(react-dom@19.0.0)(react@19.0.0)
-      '@rc-component/resize-observer': 1.1.1(react-dom@19.0.0)(react@19.0.0)
+      '@rc-component/resize-observer': 1.1.2(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/segmented': 1.3.0(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/select': 1.6.15(react-dom@19.0.0)(react@19.0.0)
       '@rc-component/slider': 1.0.1(react-dom@19.0.0)(react@19.0.0)

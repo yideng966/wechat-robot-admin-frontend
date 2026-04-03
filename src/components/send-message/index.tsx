@@ -21,7 +21,7 @@ interface IProps {
 	onClose: () => void;
 }
 
-const CHUNK_SIZE = 50000; // 文件分片上传的分片大小
+const CHUNK_SIZE = 200 * 1000; // 文件分片上传的分片大小
 
 const SendMessage = (props: IProps) => {
 	const { message, modal } = App.useApp();
