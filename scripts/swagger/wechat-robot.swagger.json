@@ -7001,13 +7001,17 @@
 												},
 												"oss_provider": {
 													"type": "string",
-													"enum": ["aliyun", "tencent_cloud", "cloudflare"]
+													"enum": ["aliyun", "tencent_cloud", "cloudflare", "volcengine"]
 												},
 												"aliyun_oss_settings": {
 													"type": "object",
 													"properties": {}
 												},
 												"tencent_cloud_oss_settings": {
+													"type": "object",
+													"properties": {}
+												},
+												"volcengine_tos_settings": {
 													"type": "object",
 													"properties": {}
 												},
@@ -7026,7 +7030,8 @@
 												"aliyun_oss_settings",
 												"tencent_cloud_oss_settings",
 												"cloudflare_r2_settings",
-												"auto_upload_image_mode"
+												"auto_upload_image_mode",
+												"volcengine_tos_settings"
 											]
 										}
 									},
@@ -7089,13 +7094,17 @@
 									},
 									"oss_provider": {
 										"type": "string",
-										"enum": ["aliyun", "tencent_cloud", "cloudflare"]
+										"enum": ["aliyun", "tencent_cloud", "cloudflare", "volcengine"]
 									},
 									"aliyun_oss_settings": {
 										"type": "object",
 										"properties": {}
 									},
 									"tencent_cloud_oss_settings": {
+										"type": "object",
+										"properties": {}
+									},
+									"volcengine_tos_settings": {
 										"type": "object",
 										"properties": {}
 									},
@@ -7114,7 +7123,8 @@
 									"aliyun_oss_settings",
 									"tencent_cloud_oss_settings",
 									"cloudflare_r2_settings",
-									"auto_upload_image_mode"
+									"auto_upload_image_mode",
+									"volcengine_tos_settings"
 								]
 							},
 							"examples": {}
