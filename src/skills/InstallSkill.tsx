@@ -140,11 +140,11 @@ const InstallSkill = (props: IProps) => {
 						<>
 							示例:{' '}
 							<a
-								href="https://github.com/hp0912/wechat-robot-skills/tree/main/skills/kfc"
+								href="https://git.houhoukang.com/houhou/wechat-robot-skills/src/branch/main/skills/kfc"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								https://github.com/hp0912/wechat-robot-skills/tree/main/skills/kfc
+								https://git.houhoukang.com/houhou/wechat-robot-skills/src/branch/main/skills/kfc
 							</a>
 						</>
 					}

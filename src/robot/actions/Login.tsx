@@ -1,8 +1,9 @@
-import { ScanOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn, useSetState } from 'ahooks';
-import { Alert, Button, Checkbox, Modal, Radio, theme, Tooltip } from 'antd';
+import { Alert, Checkbox, Modal, Radio, theme, Tooltip } from 'antd';
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import type { Api } from '@/api/wechat-robot/wechat-robot';
+import ScanOutlined from '@/icons/ScanOutlined';
 import RobotA16Login from './components/RobotA16Login';
 import RobotData62Login from './components/RobotData62Login';
 import RobotScanLogin from './components/RobotScanLogin';
@@ -16,6 +17,31 @@ interface IProps {
 type IRobot = Api.V1RobotListList.ResponseBody['data']['items'][number];
 
 type ILoginType = 'ipad' | 'win' | 'car' | 'mac' | 'iphone' | 'android';
+
+const ScanAction = styled(ScanOutlined)`
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #4b556f;
+	font-size: 28px;
+	opacity: 0.88;
+	transform-origin: center;
+	transition:
+		color 0.2s ease,
+		transform 0.2s ease,
+		opacity 0.2s ease,
+		filter 0.2s ease;
+
+	&:hover,
+	&:focus-visible {
+		color: #1f2740;
+		opacity: 1;
+		transform: translateY(-1px) scale(1.12);
+		filter: drop-shadow(0 4px 10px rgba(31, 39, 64, 0.18));
+		outline: none;
+	}
+`;
 
 const LoginType = (props: {
 	open: boolean;
@@ -187,12 +213,19 @@ const Login = (props: IProps) => {
 			}}
 		>
 			<div style={{ display: 'inline-block' }}>
-				<Button
-					type="text"
-					icon={<ScanOutlined />}
+				<ScanAction
+					role="button"
+					tabIndex={0}
 					onClick={() => {
 						setLoginType({ open: true });
 						setOnTipOpen.setFalse();
+					}}
+					onKeyDown={ev => {
+						if (ev.key === 'Enter' || ev.key === ' ') {
+							ev.preventDefault();
+							setLoginType({ open: true });
+							setOnTipOpen.setFalse();
+						}
 					}}
 				/>
 				{loginType.open && (
