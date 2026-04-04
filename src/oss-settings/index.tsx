@@ -4,7 +4,7 @@ import React from 'react';
 import type { Api } from '@/api/wechat-robot/wechat-robot';
 import { filterOption } from '@/common/filter-option';
 import type { AnyType } from '@/common/types';
-import { AliyunOSSConfig, CloudflareR2Config, TencentCloudOSSConfig } from '@/constant/oss';
+import { AliyunOSSConfig, CloudflareR2Config, TencentCloudOSSConfig, VolcengineTOSConfig } from '@/constant/oss';
 
 interface IProps {
 	robotId: number;
@@ -38,6 +38,13 @@ const OSSSettings = (props: IProps) => {
 					if (data.tencent_cloud_oss_settings) {
 						try {
 							(data as AnyType).tencent_cloud_oss_settings = JSON.stringify(data.tencent_cloud_oss_settings, null, 2);
+						} catch {
+							//
+						}
+					}
+					if (data.volcengine_tos_settings) {
+						try {
+							(data as AnyType).volcengine_tos_settings = JSON.stringify(data.volcengine_tos_settings, null, 2);
 						} catch {
 							//
 						}
@@ -96,6 +103,15 @@ const OSSSettings = (props: IProps) => {
 			}
 		} else {
 			values.tencent_cloud_oss_settings = {};
+		}
+		if (values.volcengine_tos_settings) {
+			try {
+				values.volcengine_tos_settings = JSON.parse(values.volcengine_tos_settings as unknown as string);
+			} catch {
+				values.volcengine_tos_settings = {};
+			}
+		} else {
+			values.volcengine_tos_settings = {};
 		}
 		if (values.cloudflare_r2_settings) {
 			try {
@@ -239,9 +255,10 @@ const OSSSettings = (props: IProps) => {
 							}}
 							allowClear
 							options={[
-								{ label: '阿里云', value: 'aliyun', text: '阿里云' },
-								{ label: '腾讯云', value: 'tencent_cloud', text: '腾讯云' },
-								{ label: 'Cloudflare R2', value: 'cloudflare', text: 'Cloudflare R2' },
+								{ label: '阿里云', value: 'aliyun', text: '阿里云 aliyun' },
+								{ label: '腾讯云', value: 'tencent_cloud', text: '腾讯云 tencent_cloud' },
+								{ label: '火山云', value: 'volcengine', text: '火山云 volcengine' },
+								{ label: 'Cloudflare R2', value: 'cloudflare', text: 'Cloudflare R2 cloudflare' },
 							]}
 						/>
 					</Form.Item>
@@ -274,6 +291,22 @@ const OSSSettings = (props: IProps) => {
 						<Input.TextArea
 							placeholder="请输入腾讯云 OSS 设置"
 							rows={8}
+							allowClear
+						/>
+					</Form.Item>
+					<Form.Item
+						name="volcengine_tos_settings"
+						label="火山云 TOS 设置"
+						initialValue={JSON.stringify(VolcengineTOSConfig, null, 2)}
+						tooltip={
+							<>
+								<pre>{JSON.stringify(VolcengineTOSConfig, null, 2)}</pre>
+							</>
+						}
+					>
+						<Input.TextArea
+							placeholder="请输入火山云 TOS 设置"
+							rows={9}
 							allowClear
 						/>
 					</Form.Item>

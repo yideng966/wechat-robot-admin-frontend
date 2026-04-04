@@ -16,6 +16,16 @@ export const TencentCloudOSSConfig = {
 	secret_key: '',
 };
 
+export const VolcengineTOSConfig = {
+	endpoint: 'https://tos-cn-beijing.volces.com',
+	region: 'cn-beijing',
+	bucket_name: '',
+	access_key: '',
+	secret_key: '',
+	base_path: '',
+	custom_domain: '',
+};
+
 export const CloudflareR2Config = {
 	access_key_id: '',
 	account_id: '',
