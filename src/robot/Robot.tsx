@@ -45,10 +45,10 @@ const StyledCard = styled(Card)<{
 	position: relative;
 	overflow: hidden;
 	width: 100%;
-	border: 1px solid rgba(148, 163, 184, 0.14);
+	border: 1.5px solid rgba(148, 163, 184, 0.35);
 	border-radius: 22px;
 	background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 250, 251, 0.96));
-	box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+	box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
 	transition:
 		box-shadow 0.24s ease,
 		border-color 0.24s ease;
@@ -63,8 +63,8 @@ const StyledCard = styled(Card)<{
 	}
 
 	&:hover {
-		border-color: ${({ $accent }) => `${$accent}40`};
-		box-shadow: 0 20px 48px rgba(15, 23, 42, 0.1);
+		border-color: ${({ $accent }) => `${$accent}80`};
+		box-shadow: 0 20px 48px rgba(15, 23, 42, 0.11);
 	}
 
 	.ant-card-body {
