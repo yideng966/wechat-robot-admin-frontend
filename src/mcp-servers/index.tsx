@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { useMemoizedFn, useRequest, useSetState, useSize } from 'ahooks';
-import { App, Button, Empty, List, Spin, Tag } from 'antd';
+import { Alert, App, Button, Empty, List, Spin, Tag } from 'antd';
 import VirtualList from 'rc-virtual-list';
 import React, { useRef } from 'react';
 import type { MCPServer } from '@/api/wechat-robot/wechat-robot';
@@ -92,7 +92,7 @@ const MCPServers = (props: IProps) => {
 				</Button>
 			</div>
 			<div
-				style={{ height: 'calc(100vh - 188px)', overflow: 'auto' }}
+				style={{ height: 'calc(100vh - 188px)', position: 'relative', overflow: 'auto' }}
 				ref={containerRef}
 			>
 				{!data?.length ? (
@@ -158,6 +158,17 @@ const MCPServers = (props: IProps) => {
 						onClose={onMCPServerEditorClose}
 					/>
 				)}
+				<Alert
+					style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)' }}
+					description={
+						<span style={{ fontSize: 12 }}>
+							文生图/图生图功能已经从内置 MCP 服务中移除，请使用 Skills 支持文生图/图生图功能。
+						</span>
+					}
+					type="warning"
+					closable
+					showIcon
+				/>
 			</div>
 		</Spin>
 	);
