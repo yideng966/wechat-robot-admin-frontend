@@ -63,7 +63,24 @@ const EnvEditor = (props: IProps) => {
 					onClick={() => {
 						props.onChange?.(
 							JSON.stringify(
-								[{ key: 'ENV_VAR_KEY', value: 'ENV_VAR_VALUE', description: '这是一个环境变量的示例' }],
+								[
+									{
+										key: 'MYSQL_HOST',
+										value: 'wechat-admin-mysql',
+									},
+									{
+										key: 'MYSQL_PORT',
+										value: '3306',
+									},
+									{
+										key: 'MYSQL_USER',
+										value: 'root',
+									},
+									{
+										key: 'MYSQL_PASSWORD',
+										value: '',
+									},
+								],
 								null,
 								2,
 							),
