@@ -36,7 +36,7 @@ const DocumentEditor = (props: { value?: string; onChange?: (value?: string) => 
 			<Editor
 				width="100%"
 				height="calc(100vh - 286px)"
-				language="text"
+				language="markdown"
 				options={{
 					tabSize: 2,
 					insertSpaces: true,
