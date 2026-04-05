@@ -19,6 +19,7 @@ import {
 import React from 'react';
 import type { Api } from '@/api/wechat-robot/wechat-robot';
 import { filterOption } from '@/common/filter-option';
+import { maxTagPlaceholder } from '@/common/maxTagPlaceholder';
 import ParamsGroup from '@/components/ParamsGroup';
 import { DefaultAvatar } from '@/constant';
 import { AiModels } from '@/constant/ai';
@@ -64,6 +65,29 @@ const ChatRoomSettings = (props: IProps) => {
 		async () => {
 			const resp = await window.wechatRobotClient.api.v1GlobalSettingsList({ id: props.robotId });
 			return resp.data;
+		},
+		{
+			manual: false,
+			onError: reason => {
+				message.error(reason.message);
+			},
+		},
+	);
+
+	// 知识库列表
+	const { data: knowledgeCategories, loading: knowledgeCategoriesLoading } = useRequest(
+		async () => {
+			const resp = await window.wechatRobotClient.api.v1KnowledgeCategoriesList({
+				id: props.robotId,
+				type: 'text',
+			});
+			return (resp.data?.data || []).map(item => {
+				return {
+					label: item.name,
+					value: item.code,
+					text: `${item.name} (${item.code})`,
+				};
+			});
 		},
 		{
 			manual: false,
@@ -454,6 +478,26 @@ const ChatRoomSettings = (props: IProps) => {
 													placeholder="不填则使用全局配置"
 													style={{ width: '100%' }}
 													options={AiModels}
+												/>
+											</Form.Item>
+											<Form.Item
+												name="knowledge_categories"
+												label="绑定知识库"
+												labelCol={{ flex: '0 0 130px' }}
+												wrapperCol={{ flex: '1 1 calc(100% - 130px)' }}
+												tooltip="绑定知识库后，AI 会按需从知识库中检索相关内容，并在回答中引用这些内容，提升回答的准确性和专业性"
+											>
+												<Select
+													mode="multiple"
+													placeholder="请选择知识库"
+													showSearch={{
+														filterOption,
+													}}
+													allowClear
+													loading={knowledgeCategoriesLoading}
+													maxTagCount="responsive"
+													maxTagPlaceholder={maxTagPlaceholder}
+													options={knowledgeCategories || []}
 												/>
 											</Form.Item>
 											<Form.Item

@@ -1852,6 +1852,12 @@
 												},
 												"morning_enabled": {
 													"type": "boolean"
+												},
+												"knowledge_categories": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
 												}
 											},
 											"required": [
@@ -2056,6 +2062,12 @@
 									},
 									"morning_enabled": {
 										"type": "boolean"
+									},
+									"knowledge_categories": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
 									}
 								},
 								"required": [
@@ -2097,7 +2109,8 @@
 									"image_recognition_model",
 									"short_video_parsing_enabled",
 									"wxhb_notify_enabled",
-									"podcast_enabled"
+									"podcast_enabled",
+									"knowledge_categories"
 								]
 							},
 							"example": {
