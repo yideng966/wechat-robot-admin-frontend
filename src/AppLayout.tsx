@@ -211,7 +211,7 @@ const AppLayout: React.FC = () => {
 							<div
 								className="nav-item"
 								onClick={() => {
-									message.info('敬请期待');
+									window.open('https://wechat-doc.houhoukang.com', '_blank');
 								}}
 							>
 								<FileWordOutlined className="nav-icon" />
