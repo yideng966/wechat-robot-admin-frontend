@@ -162,7 +162,15 @@ const MCPServers = (props: IProps) => {
 					style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)' }}
 					description={
 						<span style={{ fontSize: 12 }}>
-							文生图/图生图功能已经从内置 MCP 服务中移除，请使用 Skills 支持文生图/图生图功能。
+							文生图/图生图/生成视频/文本转语音，这些功能已经从内置 MCP 服务中移除，请使用{' '}
+							<a
+								href="https://git.houhoukang.com/houhou/wechat-robot-skills"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Skills
+							</a>{' '}
+							替代这些功能。
 						</span>
 					}
 					type="warning"
