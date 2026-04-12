@@ -1,8 +1,8 @@
-import { theme } from 'antd';
+import { Image, theme } from 'antd';
 import { XMLParser } from 'fast-xml-parser';
 import React from 'react';
 import type { Api } from '@/api/wechat-robot/wechat-robot';
-import { AppMessageTypeMap, MessageTypeMap } from '@/constant';
+import { AppMessageTypeMap, ImageFallback, MessageTypeMap } from '@/constant';
 import type { AppMessageType } from '@/constant/types';
 import { MessageType } from '@/constant/types';
 
@@ -25,22 +25,43 @@ const MessageContent = (props: IProps) => {
 	switch (msgType) {
 		case MessageType.Text:
 			return <pre className="text-message">{props.message.content}</pre>;
-
 		case MessageType.Image:
 			if (props.message.attachment_url) {
 				return (
-					<img
-						style={{ maxHeight: 300, width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
+					<Image
+						styles={{
+							image: {
+								maxHeight: 300,
+								width: 'auto',
+								maxWidth: '100%',
+							},
+						}}
 						src={props.message.attachment_url}
 						alt={props.message.display_full_content || '图片消息'}
+						preview={{
+							mask: true,
+							cover: '点击查看大图',
+						}}
+						fallback={ImageFallback}
 					/>
 				);
 			}
 			return (
-				<img
-					style={{ maxHeight: 300, width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
+				<Image
+					styles={{
+						image: {
+							maxHeight: 300,
+							width: 'auto',
+							maxWidth: '100%',
+						},
+					}}
 					src={`/api/v1/chat/image/download?id=${props.robotId}&message_id=${props.message.id}`}
 					alt={props.message.display_full_content || '图片消息'}
+					preview={{
+						mask: true,
+						cover: '点击查看大图',
+					}}
+					fallback={ImageFallback}
 				/>
 			);
 		case MessageType.Voice:
@@ -50,6 +71,29 @@ const MessageContent = (props: IProps) => {
 					src={`/api/v1/chat/voice/download?id=${props.robotId}&message_id=${props.message.id}`}
 				/>
 			);
+		case MessageType.Emoticon: {
+			if (!props.message.content) {
+				return '[表情消息] 异常';
+			}
+			const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' });
+			const jsonObj = parser.parse(props.message.content) as {
+				msg: {
+					emoji: {
+						cdnurl: string;
+					};
+				};
+			};
+			if (jsonObj.msg && jsonObj.msg.emoji && jsonObj.msg.emoji.cdnurl) {
+				return (
+					<img
+						src={jsonObj.msg.emoji.cdnurl}
+						alt="[表情消息]"
+						style={{ maxWidth: 200, maxHeight: 200 }}
+					/>
+				);
+			}
+			return '[表情消息] 异常';
+		}
 		case MessageType.App: {
 			if (props.message.display_full_content) {
 				return props.message.display_full_content;
