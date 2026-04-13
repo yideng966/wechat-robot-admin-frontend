@@ -60,6 +60,15 @@ const MessageContentContainer = styled.div`
 		color: #010101;
 		display: inline;
 	}
+
+	.refer-message {
+		border-left: 3px solid #626675;
+		color: #9195a3;
+		margin: 0 0 12px 0;
+		padding-left: 12px;
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
 `;
 
 const ChatHistory = (props: IProps) => {
