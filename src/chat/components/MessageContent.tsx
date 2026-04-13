@@ -107,7 +107,7 @@ const MessageContent = (props: IProps) => {
 			if (jsonObj.msg && jsonObj.msg.emoji && jsonObj.msg.emoji.cdnurl) {
 				return (
 					<img
-						src={jsonObj.msg.emoji.cdnurl.replaceAll('&amp;', '&')}
+						src={jsonObj.msg.emoji.cdnurl.replaceAll('&amp;', '&').replace(/^http:\/\//, 'https://')}
 						alt="[表情消息]"
 						style={{ maxWidth: 200, maxHeight: 200 }}
 					/>
