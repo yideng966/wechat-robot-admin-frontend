@@ -5,7 +5,7 @@ import React from 'react';
 import type { Api } from '@/api/wechat-robot/wechat-robot';
 import type { AnyType } from '@/common/types';
 import ParamsGroup from '@/components/ParamsGroup';
-import { AiModels, TextEmbeddingModels } from '@/constant/ai';
+import { AiModels, TextEmbeddingDimensions, TextEmbeddingModels } from '@/constant/ai';
 import {
 	fromCronExpression,
 	generateMondayCronExpression,
@@ -304,6 +304,24 @@ const GlobalSettings = (props: IProps) => {
 														placeholder="请选择或者手动输入文本嵌入模型"
 														style={{ width: '100%' }}
 														options={TextEmbeddingModels}
+													/>
+												</Form.Item>
+												<Form.Item
+													name="text_embedding_dimension"
+													label="文本嵌入维度"
+													labelCol={{ flex: '0 0 130px' }}
+													rules={[{ required: true, message: '文本嵌入维度不能为空' }]}
+													help={
+														<>
+															<b style={{ color: '#e46161' }}>特别注意</b>{' '}
+															修改文本嵌入模型后，需要在文本知识库重建索引，否则会导致数据不兼容
+														</>
+													}
+												>
+													<Select
+														placeholder="请选择文本嵌入维度"
+														style={{ width: '100%' }}
+														options={TextEmbeddingDimensions}
 													/>
 												</Form.Item>
 												<Form.Item

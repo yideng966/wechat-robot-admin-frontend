@@ -8820,6 +8820,50 @@
 				"security": []
 			}
 		},
+		"/api/v1/vector/reindex-all": {
+			"post": {
+				"summary": "向量库重建索引",
+				"deprecated": false,
+				"description": "",
+				"tags": [],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "query",
+						"description": "",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"code": {
+											"type": "integer"
+										},
+										"message": {
+											"type": "string"
+										},
+										"data": {
+											"type": "string"
+										}
+									},
+									"required": ["code", "message", "data"]
+								}
+							}
+						}
+					}
+				},
+				"security": []
+			}
+		},
 		"/api/v1/message/timbre": {
 			"get": {
 				"summary": "获取音色列表",
@@ -10223,6 +10267,9 @@
 					"text_embedding_model": {
 						"type": "string"
 					},
+					"text_embedding_dimension": {
+						"type": "integer"
+					},
 					"image_embedding_model": {
 						"type": "string"
 					},
@@ -10277,7 +10324,9 @@
 					"pat_text",
 					"pat_voice_timbre",
 					"workflow_model",
-					"image_recognition_model"
+					"image_recognition_model",
+					"text_embedding_dimension",
+					"text_embedding_model"
 				]
 			}
 		},
