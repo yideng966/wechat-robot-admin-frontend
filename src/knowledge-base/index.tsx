@@ -1,6 +1,6 @@
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, RedoOutlined } from '@ant-design/icons';
 import { useBoolean, useRequest } from 'ahooks';
-import { App, Button, Table, theme } from 'antd';
+import { App, Button, Space, Table, theme } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
 import type { Api } from '@/api/wechat-robot/wechat-robot';
@@ -24,7 +24,7 @@ interface IProps {
 
 const KnowledgeBase = (props: IProps) => {
 	const { token } = theme.useToken();
-	const { message } = App.useApp();
+	const { message, modal } = App.useApp();
 
 	const [onNewOpen, setOnNewOpen] = useBoolean(false);
 
@@ -44,17 +44,57 @@ const KnowledgeBase = (props: IProps) => {
 		},
 	);
 
+	const { runAsync: reindex, loading: reindexLoading } = useRequest(
+		async () => {
+			const resp = await window.wechatRobotClient.api.v1VectorReindexAllCreate({
+				id: props.robotId,
+			});
+			return resp.data?.data;
+		},
+		{
+			manual: true,
+			onSuccess: () => {
+				modal.success({
+					title: '重建索引任务已创建',
+					content: '重建索引任务已创建，预计需要几分钟时间完成，请关注微信客户端容器日志。',
+				});
+			},
+			onError: reason => {
+				message.error(reason.message);
+			},
+		},
+	);
+
 	return (
 		<Container>
 			<div className="action-bar">
-				<Button
-					color="primary"
-					variant="outlined"
-					icon={<PlusOutlined />}
-					onClick={setOnNewOpen.setTrue}
-				>
-					新建知识库
-				</Button>
+				<Space>
+					<Button
+						color="primary"
+						variant="filled"
+						icon={<RedoOutlined />}
+						loading={reindexLoading}
+						onClick={() => {
+							modal.confirm({
+								title: '重建向量库索引',
+								content: '重建索引会删除原有索引并重新创建，预计需要几分钟时间完成，确定要继续吗？',
+								onOk: async () => {
+									await reindex();
+								},
+							});
+						}}
+					>
+						重建索引
+					</Button>
+					<Button
+						color="primary"
+						variant="filled"
+						icon={<PlusOutlined />}
+						onClick={setOnNewOpen.setTrue}
+					>
+						新建知识库
+					</Button>
+				</Space>
 			</div>
 			<Table
 				rowKey="id"
