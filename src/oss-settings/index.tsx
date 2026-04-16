@@ -184,7 +184,6 @@ const OSSSettings = (props: IProps) => {
 						initialValue={false}
 					>
 						<Switch
-							disabled
 							unCheckedChildren="关闭"
 							checkedChildren="开启"
 						/>
@@ -202,7 +201,6 @@ const OSSSettings = (props: IProps) => {
 								filterOption,
 							}}
 							allowClear
-							disabled
 							options={[
 								{ label: '上传所有视频', value: 'all', text: '上传所有视频' },
 								{ label: '仅上传被AI引用的视频', value: 'ai_only', text: '仅上传被AI引用的视频' },
