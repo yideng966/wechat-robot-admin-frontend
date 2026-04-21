@@ -148,7 +148,7 @@ const SystemSettings = (props: IProps) => {
 	);
 
 	const { runAsync: onSave, loading: saveLoading } = useRequest(
-		async (data: Api.V1SystemSettingsCreate.RequestBody) => {
+		async (data: IFormValues) => {
 			const resp = await window.wechatRobotClient.api.v1SystemSettingsCreate(
 				{
 					...data,
@@ -173,8 +173,8 @@ const SystemSettings = (props: IProps) => {
 		},
 	);
 
-	const onOk = async () => {
-		const values = await form.validateFields();
+	const getFormValues = async () => {
+		const values = (await form.validateFields()) as IFormValues;
 		const webhookHeaders = values.webhook_headers as unknown as string;
 		if (webhookHeaders?.trim()) {
 			try {
@@ -185,6 +185,46 @@ const SystemSettings = (props: IProps) => {
 		} else {
 			values.webhook_headers = {};
 		}
+		return values;
+	};
+
+	const { runAsync: onTestNotification, loading: testNotificationLoading } = useRequest(
+		async () => {
+			const values = await getFormValues();
+			const resp = await fetch(`/api/v1/system-settings/test-notification?id=${props.robotId}`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					...values,
+					system_settings_id: values.id || 0,
+				}),
+			});
+
+			let result: { code?: number; message?: string } = {};
+			try {
+				result = (await resp.json()) as { code?: number; message?: string };
+			} catch {
+				result = {};
+			}
+			if (!resp.ok || result.code !== 200) {
+				throw new Error(result.message || '测试推送失败');
+			}
+		},
+		{
+			manual: true,
+			onSuccess: () => {
+				message.success('测试推送成功');
+			},
+			onError: reason => {
+				message.error(reason.message);
+			},
+		},
+	);
+
+	const onOk = async () => {
+		const values = await getFormValues();
 		onSave(values);
 	};
 
@@ -306,6 +346,7 @@ const SystemSettings = (props: IProps) => {
 											options={[
 												{ label: '推送加', value: 'push_plus', text: '推送加' },
 												{ label: '邮件', value: 'email', disabled: true, text: '邮件' },
+												{ label: '企业微信应用', value: 'wechat_work_app', text: '企业微信应用' },
 											]}
 										/>
 									</Form.Item>
@@ -319,9 +360,7 @@ const SystemSettings = (props: IProps) => {
 										}}
 									>
 										{({ getFieldValue }) => {
-											const notificationType = getFieldValue(
-												'notification_type',
-											) as Api.V1SystemSettingsCreate.RequestBody['notification_type'];
+											const notificationType = getFieldValue('notification_type') as string | undefined;
 											if (notificationType === 'push_plus') {
 												return (
 													<>
@@ -368,6 +407,69 @@ const SystemSettings = (props: IProps) => {
 																placeholder="请输入[推送加]密钥"
 																allowClear
 															/>
+														</Form.Item>
+													</>
+												);
+											}
+											if (notificationType === 'wechat_work_app') {
+												return (
+													<>
+														<Form.Item
+															name="wechat_work_corp_id"
+															label="[企业微信应用]企业ID"
+															rules={[{ required: true, message: '[企业微信应用]企业ID不能为空' }]}
+														>
+															<Input
+																placeholder="请输入[企业微信应用]企业ID"
+																allowClear
+															/>
+														</Form.Item>
+														<Form.Item
+															name="wechat_work_agent_id"
+															label="[企业微信应用]AgentId"
+															rules={[{ required: true, message: '[企业微信应用]AgentId不能为空' }]}
+														>
+															<Input
+																placeholder="请输入[企业微信应用]AgentId"
+																allowClear
+															/>
+														</Form.Item>
+														<Form.Item
+															name="wechat_work_secret"
+															label="[企业微信应用]Secret"
+															rules={[{ required: true, message: '[企业微信应用]Secret不能为空' }]}
+														>
+															<Input.Password
+																placeholder="请输入[企业微信应用]Secret"
+																allowClear
+															/>
+														</Form.Item>
+														<Form.Item
+															name="wechat_work_proxy_url"
+															label="[企业微信应用]代理地址"
+														>
+															<Input
+																placeholder="请输入[企业微信应用]代理地址，可选"
+																allowClear
+															/>
+														</Form.Item>
+														<Form.Item
+															name="wechat_work_to_user"
+															label="[企业微信应用]推送用户ID"
+															extra="不填默认 ALL，多个用户ID可使用 | 分隔"
+														>
+															<Input
+																placeholder="请输入[企业微信应用]推送用户ID"
+																allowClear
+															/>
+														</Form.Item>
+														<Form.Item label="[企业微信应用]测试推送">
+															<Button
+																loading={testNotificationLoading}
+																onClick={() => void onTestNotification()}
+															>
+																测试推送
+															</Button>
 														</Form.Item>
 													</>
 												);
