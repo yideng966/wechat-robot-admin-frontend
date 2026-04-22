@@ -6688,6 +6688,21 @@
 												"push_plus_token": {
 													"type": "string"
 												},
+												"wecom_corp_id": {
+													"type": "string"
+												},
+												"wecom_agent_id": {
+													"type": "string"
+												},
+												"wecom_secret": {
+													"type": "string"
+												},
+												"wecom_proxy_url": {
+													"type": "string"
+												},
+												"wecom_to_user": {
+													"type": "string"
+												},
 												"auto_verify_user": {
 													"type": "boolean"
 												},
@@ -6706,7 +6721,12 @@
 												"push_plus_token",
 												"auto_verify_user",
 												"verify_user_delay",
-												"auto_chatroom_invite"
+												"auto_chatroom_invite",
+												"wecom_corp_id",
+												"wecom_agent_id",
+												"wecom_secret",
+												"wecom_proxy_url",
+												"wecom_to_user"
 											]
 										}
 									},
@@ -6769,6 +6789,21 @@
 										"type": "string"
 									},
 									"push_plus_token": {
+										"type": "string"
+									},
+									"wecom_corp_id": {
+										"type": "string"
+									},
+									"wecom_agent_id": {
+										"type": "string"
+									},
+									"wecom_secret": {
+										"type": "string"
+									},
+									"wecom_proxy_url": {
+										"type": "string"
+									},
+									"wecom_to_user": {
 										"type": "string"
 									},
 									"auto_verify_user": {
